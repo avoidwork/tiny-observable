@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>tiny-observable by avoidwork</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">tiny-observable</h1>
+      <h2 class="project-tagline">Tiny Observable for Client or Server</h2>
+      <a href="https://github.com/avoidwork/tiny-observable" class="btn">View on GitHub</a>
+      <a href="https://github.com/avoidwork/tiny-observable/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/avoidwork/tiny-observable/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="tiny-observable" class="anchor" href="#tiny-observable" aria-hidden="true"><span class="octicon octicon-link"></span></a>tiny-observable</h1>
+
+<p><a href="http://travis-ci.org/avoidwork/tiny-observable"><img src="https://secure.travis-ci.org/avoidwork/tiny-observable.svg" alt="build status"></a></p>
+
+<p>Tiny Observable for Client or Server</p>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">const</span> <span class="pl-c1">observerable</span> <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">"</span>tiny-observable<span class="pl-pds">"</span></span>);
+<span class="pl-k">let</span> observer <span class="pl-k">=</span> <span class="pl-en">observerable</span>();
+
+<span class="pl-c">// Hooking into every click event</span>
+<span class="pl-smi">observer</span>.<span class="pl-en">hook</span>(<span class="pl-smi">document</span>.<span class="pl-en">querySelector</span>(<span class="pl-s"><span class="pl-pds">"</span>body<span class="pl-pds">"</span></span>), <span class="pl-s"><span class="pl-pds">"</span>click<span class="pl-pds">"</span></span>);
+
+<span class="pl-c">// Capturing events, and redirecting</span>
+<span class="pl-smi">observer</span>.<span class="pl-en">on</span>(<span class="pl-s"><span class="pl-pds">"</span>click<span class="pl-pds">"</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">ev</span>) {
+  <span class="pl-smi">ev</span>.<span class="pl-en">preventDefault</span>();
+  <span class="pl-smi">ev</span>.<span class="pl-en">stopPropagation</span>();
+  <span class="pl-en">customFunction</span>(ev);
+});</pre></div>
+
+<h2>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h2>
+
+<h4>
+<a id="dispatchevent--" class="anchor" href="#dispatchevent--" aria-hidden="true"><span class="octicon octicon-link"></span></a>dispatch(event [, ...]);</h4>
+
+<p>Dispatches an event, with optional arguments.</p>
+
+<h4>
+<a id="hookobject-event" class="anchor" href="#hookobject-event" aria-hidden="true"><span class="octicon octicon-link"></span></a>hook(object, event);</h4>
+
+<p>Hooks into <code>object</code> for an event; can be an Element or Array like Object.</p>
+
+<h4>
+<a id="offevent-id" class="anchor" href="#offevent-id" aria-hidden="true"><span class="octicon octicon-link"></span></a>off(event, id);</h4>
+
+<p>Removes all, or a specific listener for an event.</p>
+
+<h4>
+<a id="onevent-handler-id-scope" class="anchor" href="#onevent-handler-id-scope" aria-hidden="true"><span class="octicon octicon-link"></span></a>on(event, handler[, id, scope])</h4>
+
+<p>Adds a listener for an event.</p>
+
+<h4>
+<a id="onceevent-handler-id-scope" class="anchor" href="#onceevent-handler-id-scope" aria-hidden="true"><span class="octicon octicon-link"></span></a>once(event, handler[, id, scope])</h4>
+
+<p>Adds a single execution event listener for an event.</p>
+
+<h4>
+<a id="unhookobject-event" class="anchor" href="#unhookobject-event" aria-hidden="true"><span class="octicon octicon-link"></span></a>unhook(object, event);</h4>
+
+<p>Unhooks an event from a <code>object</code>; can be an Element or Array like Object.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Copyright (c) 2015 Jason Mulligan
+Licensed under the BSD-3 license</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/avoidwork/tiny-observable">tiny-observable</a> is maintained by <a href="https://github.com/avoidwork">avoidwork</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
