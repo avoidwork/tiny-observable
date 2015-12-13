@@ -1,0 +1,13 @@
+/.idea/
+/node_modules/
+/lib/haro.min.js
+/lib/haro.min.js.map
+/src/
+/test/
+.eslintrc
+.git
+.gitignore
+.travis.yml
+Gruntfile.js
+benchmark.js
+bower.json
