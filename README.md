@@ -7,8 +7,8 @@ Tiny Observable for Client or Server
 ```javascript
 let observer = observerable();
 
-// Hooking into every anchor
-observer.hook(document.querySelectorAll("a"), "click");
+// Hooking into every click event
+observer.hook(document.querySelector("body"), "click");
 
 // Capturing events, and redirecting
 observer.on("click", function (ev) {
