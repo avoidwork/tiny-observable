@@ -7,7 +7,15 @@ Tiny Observable for Client or Server
 ```javascript
 let observer = observerable();
 
+// Hooking into every anchor
 observer.hook(document.querySelectorAll("a"), "click");
+
+// Capturing events, and redirecting
+observer.on("click", function (ev) {
+  ev.preventDefault();
+  ev.stopPropagation();
+  customFunction(ev);
+});
 ```
 
 ## API

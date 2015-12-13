@@ -7,8 +7,10 @@ class Observable {
 
 	dispatch (ev, ...args) {
 		if (ev && has(this.listeners, ev)) {
-			iterate(this.listeners[ev], function (i) {
-				i.handler.apply(i.scope, args);
+			iterate(this.listeners[ev], i => {
+				let obj = this.listeners[ev][i];
+
+				obj.handler.apply(obj.scope, args);
 			});
 		}
 
@@ -21,7 +23,7 @@ class Observable {
 		ltarget.forEach(t => {
 			let obj;
 
-			if (!has(t, addEventListener)) {
+			if (!has(t, "addEventListener")) {
 				throw new Error("Invalid Arguments");
 			}
 
@@ -82,7 +84,13 @@ class Observable {
 		let ltarget = array(target);
 
 		ltarget.forEach(t => {
-			let obj = this.hooks.get(t);
+			let obj;
+
+			if (!has(t, "removeEventListener")) {
+				throw new Error("Invalid Arguments");
+			}
+
+			obj = this.hooks.get(t);
 
 			if (obj) {
 				t.removeEventListener(ev, obj[ev], false);
