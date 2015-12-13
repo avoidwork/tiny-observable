@@ -86,7 +86,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-eslint");
 
 	// aliases
-	grunt.registerTask("test", ["eslint", "nodeunit"]);
+	grunt.registerTask("test", ["eslint"/*, "nodeunit"*/]);
 	grunt.registerTask("build", ["concat", "sed", "babel", "uglify"]);
 	grunt.registerTask("default", ["build", "test"]);
 };

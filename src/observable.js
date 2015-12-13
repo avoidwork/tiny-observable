@@ -16,24 +16,28 @@ class Observable {
 	}
 
 	hook (target, ev) {
-		let obj;
+		let ltarget = array(target);
 
-		if (!has(target, addEventListener)) {
-			throw new Error("Invalid Arguments");
-		}
+		ltarget.forEach(t => {
+			let obj;
 
-		obj = this.hooks.get(target) || {};
+			if (!has(t, addEventListener)) {
+				throw new Error("Invalid Arguments");
+			}
 
-		if (!has(obj, ev)) {
-			obj[ev] = arg => {
-				this.dispatch(ev, arg);
-			};
-		}
+			obj = this.hooks.get(t) || {};
 
-		this.hooks.set(target, obj);
-		target.addEventListener(ev, this.hooks.get(target)[ev], false);
+			if (!has(obj, ev)) {
+				obj[ev] = arg => {
+					this.dispatch(ev, arg);
+				};
+			}
 
-		return target;
+			this.hooks.set(t, obj);
+			t.addEventListener(ev, this.hooks.get(t)[ev], false);
+		});
+
+		return this;
 	}
 
 	off (ev, id) {
@@ -75,20 +79,24 @@ class Observable {
 	}
 
 	unhook (target, ev) {
-		let obj = this.hooks.get(target);
+		let ltarget = array(target);
 
-		if (obj) {
-			target.removeEventListener(ev, obj[ev], false);
-			delete obj[ev];
+		ltarget.forEach(t => {
+			let obj = this.hooks.get(t);
 
-			if (Object.keys(obj).length === 0) {
-				this.hooks.delete(target);
-			} else {
-				this.hooks.set(target, obj);
+			if (obj) {
+				t.removeEventListener(ev, obj[ev], false);
+				delete obj[ev];
+
+				if (Object.keys(obj).length === 0) {
+					this.hooks.delete(t);
+				} else {
+					this.hooks.set(t, obj);
+				}
 			}
-		}
+		});
 
-		return target;
+		return this;
 	}
 }
 
