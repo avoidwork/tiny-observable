@@ -6,7 +6,7 @@ Tiny Observable for Client or Server
 ## Example
 ```javascript
 const observerable = require("tiny-observable");
-let observer = observerable();
+let observer = observable();
 
 // Hooking into every click event
 observer.hook(document.querySelector("body"), "click");
