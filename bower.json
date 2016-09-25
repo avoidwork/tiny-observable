@@ -1,0 +1,22 @@
+{
+  "name": "tiny-observable",
+  "description": "Tiny Observable for Client and Server",
+  "main": "lib/tiny-observable.js",
+  "authors": [
+    "Jason Mulligan <jason.mulligan@avoidwork.com>"
+  ],
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "observable",
+    "observer",
+    "generic"
+  ],
+  "homepage": "https://github.com/avoidwork/tiny-observable",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
