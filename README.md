@@ -39,5 +39,5 @@ Adds a single execution event listener for an event.
 Unhooks an event from a `object`; can be an Element or Array like Object.
 
 ## License
-Copyright (c) 2015 Jason Mulligan
+Copyright (c) 2016 Jason Mulligan
 Licensed under the BSD-3 license

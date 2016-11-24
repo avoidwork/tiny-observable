@@ -25,7 +25,8 @@ module.exports = function (grunt) {
 		},
 		babel: {
 			options: {
-				sourceMap: false
+				sourceMap: false,
+				presets: ["babel-preset-es2015"]
 			},
 			dist: {
 				files: {
@@ -38,13 +39,6 @@ module.exports = function (grunt) {
 		},
 		nodeunit : {
 			all : ["test/*.js"]
-		},
-		sed : {
-			"version" : {
-				pattern : "{{VERSION}}",
-				replacement : "<%= pkg.version %>",
-				path : ["<%= concat.dist.dest %>"]
-			}
 		},
 		uglify: {
 			options: {
@@ -77,7 +71,6 @@ module.exports = function (grunt) {
 	});
 
 	// tasks
-	grunt.loadNpmTasks("grunt-sed");
 	grunt.loadNpmTasks("grunt-contrib-concat");
 	grunt.loadNpmTasks("grunt-contrib-nodeunit");
 	grunt.loadNpmTasks("grunt-contrib-watch");
@@ -87,6 +80,6 @@ module.exports = function (grunt) {
 
 	// aliases
 	grunt.registerTask("test", ["eslint"/*, "nodeunit"*/]);
-	grunt.registerTask("build", ["concat", "sed", "babel", "uglify"]);
+	grunt.registerTask("build", ["concat", "babel", "uglify"]);
 	grunt.registerTask("default", ["build", "test"]);
 };
