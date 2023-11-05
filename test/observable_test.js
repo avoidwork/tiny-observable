@@ -1,5 +1,6 @@
 import assert from "node:assert";
 import {observable, Observable} from "../dist/tiny-observable.cjs";
+import crypto from "node:crypto"; // eslint-disable-line no-unused-vars
 
 const mockElement = {
 	id: "mockElement",
