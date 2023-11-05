@@ -1,10 +1,10 @@
 {
   "name": "tiny-observable",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Tiny Observable for Client and Server",
   "type": "module",
-  "types": "types/coerce.d.ts",
-  "source": "src/coerce.js",
+  "types": "types/observable.d.ts",
+  "source": "src/observable.js",
   "main": "dist/tiny-observable.cjs",
   "exports": {
     "types": "./types/observable.d.ts",
