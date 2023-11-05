@@ -7,6 +7,8 @@ import {
 	TOKEN_LIMIT
 } from "./constants.js";
 
+const idGenerator = typeof crypto !== "undefined" ? crypto.randomUUID.bind(crypto) : () => `observable-${Math.random().toString(36).slice(2, 9)}`;
+
 export class Observable {
 	constructor (arg = 10) {
 		this.limit = arg;
@@ -40,14 +42,6 @@ export class Observable {
 		return this.limit;
 	}
 
-	listenerCount (ev = "") {
-		if (ev.length === 0) {
-			throw new TypeError(INVALID_ARGUMENTS);
-		}
-
-		return this.listeners.get(ev)?.size ?? 0;
-	}
-
 	hook (target = null, ev = EMPTY) {
 		if (target === null || ev.length === 0) {
 			throw new TypeError(INVALID_ARGUMENTS);
@@ -69,7 +63,15 @@ export class Observable {
 	}
 
 	id () {
-		return crypto.randomUUID();
+		return idGenerator();
+	}
+
+	listenerCount (ev = "") {
+		if (ev.length === 0) {
+			throw new TypeError(INVALID_ARGUMENTS);
+		}
+
+		return this.listeners.get(ev)?.size ?? 0;
 	}
 
 	off (ev = EMPTY, id = EMPTY) {

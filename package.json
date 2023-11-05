@@ -1,6 +1,6 @@
 {
   "name": "tiny-observable",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Tiny Observable for Client and Server",
   "type": "module",
   "types": "types/observable.d.ts",
@@ -22,7 +22,7 @@
     "fix": "eslint --fix *.js src/*.js test/*.js",
     "lint": "eslint *.js src/*.js test/*.js",
     "mocha": "nyc mocha test/*.js",
-    "types": "npx -p typescript tsc src/observable.js --declaration --allowJs --emitDeclarationOnly --outDir types && rm types/constants.d.ts",
+    "types": "npx -p typescript tsc src/observable.js --module es2022 --declaration --allowJs --emitDeclarationOnly --outDir types && rm types/constants.d.ts",
     "test": "npm run lint && npm run mocha",
     "prepare": "husky install"
   },

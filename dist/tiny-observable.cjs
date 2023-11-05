@@ -3,7 +3,7 @@
  *
  * @copyright 2023 Jason Mulligan <jason.mulligan@avoidwork.com>
  * @license BSD-3-Clause
- * @version 2.0.1
+ * @version 2.0.2
  */
 'use strict';
 
@@ -13,6 +13,8 @@ const INVALID_ARGUMENTS = "Invalid arguments";
 const POSSIBLE_MEMORY_LEAK = "`Possible memory leak, more than {{LIMIT}} listeners for event: {{EVENT}}";
 const TOKEN_EVENT = "{{EVENT}}";
 const TOKEN_LIMIT = "{{LIMIT}}";
+
+const idGenerator = typeof crypto !== "undefined" ? crypto.randomUUID.bind(crypto) : () => `observable-${Math.random().toString(36).slice(2, 9)}`;
 
 class Observable {
 	constructor (arg = 10) {
@@ -47,14 +49,6 @@ class Observable {
 		return this.limit;
 	}
 
-	listenerCount (ev = "") {
-		if (ev.length === 0) {
-			throw new TypeError(INVALID_ARGUMENTS);
-		}
-
-		return this.listeners.get(ev)?.size ?? 0;
-	}
-
 	hook (target = null, ev = EMPTY) {
 		if (target === null || ev.length === 0) {
 			throw new TypeError(INVALID_ARGUMENTS);
@@ -76,7 +70,15 @@ class Observable {
 	}
 
 	id () {
-		return crypto.randomUUID();
+		return idGenerator();
+	}
+
+	listenerCount (ev = "") {
+		if (ev.length === 0) {
+			throw new TypeError(INVALID_ARGUMENTS);
+		}
+
+		return this.listeners.get(ev)?.size ?? 0;
 	}
 
 	off (ev = EMPTY, id = EMPTY) {
