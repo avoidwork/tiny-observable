@@ -10,9 +10,7 @@ const HANDLER = () => void 0;
 const INVALID_ARGUMENTS = "Invalid arguments";
 const POSSIBLE_MEMORY_LEAK = "`Possible memory leak, more than {{LIMIT}} listeners for event: {{EVENT}}";
 const TOKEN_EVENT = "{{EVENT}}";
-const TOKEN_LIMIT = "{{LIMIT}}";const idGenerator = typeof crypto !== "undefined" ? crypto.randomUUID.bind(crypto) : () => `observable-${Math.random().toString(36).slice(2, 9)}`;
-
-class Observable {
+const TOKEN_LIMIT = "{{LIMIT}}";class Observable {
 	constructor (arg = 10) {
 		this.limit = arg;
 		this.listeners = new Map();
@@ -66,7 +64,7 @@ class Observable {
 	}
 
 	id () {
-		return idGenerator();
+		return `observable-${Math.random().toString(36).slice(2, 9)}`;
 	}
 
 	listenerCount (ev = "") {
@@ -165,6 +163,6 @@ class Observable {
 	}
 }
 
-function observable (arg = 10, id = crypto.randomUUID) {
-	return new Observable(arg, id);
+function observable (arg = 10) {
+	return new Observable(arg);
 }export{Observable,observable};

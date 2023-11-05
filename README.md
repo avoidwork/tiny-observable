@@ -81,7 +81,7 @@ Returns the count of listeners per event; this does not relate to hooked objects
 Hooks an event on an object or element.
 
 ### id();
-Returns a random UUID (v4).
+Returns a random ID.
 
 ### off(event, id);
 Removes all, or a specific listener for an event.

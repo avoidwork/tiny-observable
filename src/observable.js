@@ -7,8 +7,6 @@ import {
 	TOKEN_LIMIT
 } from "./constants.js";
 
-const idGenerator = typeof crypto !== "undefined" ? crypto.randomUUID.bind(crypto) : () => `observable-${Math.random().toString(36).slice(2, 9)}`;
-
 export class Observable {
 	constructor (arg = 10) {
 		this.limit = arg;
@@ -63,7 +61,7 @@ export class Observable {
 	}
 
 	id () {
-		return idGenerator();
+		return `observable-${Math.random().toString(36).slice(2, 9)}`;
 	}
 
 	listenerCount (ev = "") {
@@ -162,6 +160,6 @@ export class Observable {
 	}
 }
 
-export function observable (arg = 10, id = crypto.randomUUID) {
-	return new Observable(arg, id);
+export function observable (arg = 10) {
+	return new Observable(arg);
 }
