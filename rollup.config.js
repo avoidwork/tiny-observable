@@ -41,13 +41,13 @@ export default [
 			{
 				...umdOutBase,
 				file: `dist/${pkg.name}.umd.js`,
-				name: "lru"
+				name: "observable"
 			},
 			{
 				...umdOutBase,
 				...minOutBase,
 				file: `dist/${pkg.name}.umd.min.js`,
-				name: "lru"
+				name: "observable"
 			}
 		]
 	}

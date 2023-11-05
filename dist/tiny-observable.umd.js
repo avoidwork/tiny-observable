@@ -5,7 +5,7 @@
  * @license BSD-3-Clause
  * @version 2.0.0
  */
-(function(g,f){typeof exports==='object'&&typeof module!=='undefined'?f(exports):typeof define==='function'&&define.amd?define(['exports'],f):(g=typeof globalThis!=='undefined'?globalThis:g||self,f(g.lru={}));})(this,(function(exports){'use strict';const EMPTY = "";
+(function(g,f){typeof exports==='object'&&typeof module!=='undefined'?f(exports):typeof define==='function'&&define.amd?define(['exports'],f):(g=typeof globalThis!=='undefined'?globalThis:g||self,f(g.observable={}));})(this,(function(exports){'use strict';const EMPTY = "";
 const HANDLER = () => void 0;
 const INVALID_ARGUMENTS = "Invalid arguments";
 const POSSIBLE_MEMORY_LEAK = "`Possible memory leak, more than {{LIMIT}} listeners for event: {{EVENT}}";
