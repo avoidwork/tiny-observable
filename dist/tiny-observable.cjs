@@ -9,15 +9,13 @@
 
 const EMPTY = "";
 const HANDLER = () => void 0;
-const ID = () => `ob-${Math.random().toString(36).slice(2, 9)}`;
 const INVALID_ARGUMENTS = "Invalid arguments";
 const POSSIBLE_MEMORY_LEAK = "`Possible memory leak, more than {{LIMIT}} listeners for event: {{EVENT}}";
 const TOKEN_EVENT = "{{EVENT}}";
 const TOKEN_LIMIT = "{{LIMIT}}";
 
 class Observable {
-	constructor (arg = 10, id = crypto?.randomUUID ?? ID) {
-		this.id = id;
+	constructor (arg = 10) {
 		this.limit = arg;
 		this.listeners = new Map();
 		this.hooks = new WeakMap();
@@ -77,6 +75,10 @@ class Observable {
 		return this;
 	}
 
+	id () {
+		return crypto.randomUUID();
+	}
+
 	off (ev = EMPTY, id = EMPTY) {
 		if (ev.length === 0) {
 			throw new TypeError(INVALID_ARGUMENTS);
@@ -110,6 +112,7 @@ class Observable {
 	}
 
 	once (ev = "", handler = HANDLER, id = this.id(), scope = this) {
+		/* istanbul ignore next */
 		return this.on(ev, (...args) => {
 			handler.apply(scope, args);
 			this.off(ev, id);
@@ -121,7 +124,7 @@ class Observable {
 			throw new TypeError(INVALID_ARGUMENTS);
 		}
 
-		return Array.from(this.listeners.get(ev)?.values() ?? []);
+		return Array.from(this.listeners.get(ev)?.values() ?? []).map(i => i.handler);
 	}
 
 
@@ -164,7 +167,7 @@ class Observable {
 	}
 }
 
-function observable (arg = 10, id = crypto?.randomUUID ?? ID) {
+function observable (arg = 10, id = crypto.randomUUID) {
 	return new Observable(arg, id);
 }
 
