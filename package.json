@@ -1,10 +1,30 @@
 {
   "name": "tiny-observable",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Tiny Observable for Client and Server",
-  "main": "lib/tiny-observable.js",
+  "type": "module",
+  "types": "types/coerce.d.ts",
+  "source": "src/coerce.js",
+  "main": "dist/tiny-observable.cjs",
+  "exports": {
+    "types": "./types/observable.d.ts",
+    "import": "./dist/tiny-observable.js",
+    "require": "./dist/tiny-observable.cjs"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "engineStrict": true,
   "scripts": {
-    "test": "grunt test"
+    "build": "npm run lint && rm -rf dist && npm run rollup && npm run types && npm test",
+    "changelog": "auto-changelog -p",
+    "rollup": "rollup --config",
+    "fix": "eslint --fix *.js src/*.js test/*.js",
+    "lint": "eslint *.js src/*.js test/*.js",
+    "mocha": "nyc mocha test/*.js",
+    "types": "npx -p typescript tsc src/observable.js --declaration --allowJs --emitDeclarationOnly --outDir types && rm types/constants.d.ts",
+    "test": "npm run lint && npm run mocha",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -20,20 +40,14 @@
   "bugs": {
     "url": "https://github.com/avoidwork/tiny-observable/issues"
   },
-  "homepage": "http://avoidwork.github.io/tiny-observable",
   "devDependencies": {
-    "babel-eslint": "~7.1.1",
-    "babel-preset-es2015": "^6.18.0",
-    "grunt": "~1.0.1",
-    "grunt-babel": "~6.0.0",
-    "grunt-cli": "~1.2.0",
-    "grunt-contrib-concat": "~1.0.1",
-    "grunt-contrib-nodeunit": "~1.0.0",
-    "grunt-contrib-uglify": "~2.0.0",
-    "grunt-contrib-watch": "~1.0.0",
-    "grunt-eslint": "~19.0.0"
-  },
-  "dependencies": {
-    "es6-weak-map": "~2.0.1"
+    "@rollup/plugin-terser": "^0.4.3",
+    "auto-changelog": "^2.4.0",
+    "eslint": "^8.49.0",
+    "husky": "^8.0.3",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "rollup": "^4.0.0",
+    "typescript": "^5.2.2"
   }
 }

@@ -1,42 +1,111 @@
 # tiny-observable
-[![build status](https://secure.travis-ci.org/avoidwork/tiny-observable.svg)](http://travis-ci.org/avoidwork/tiny-observable)
 
-Tiny Observable for Client or Server
+Tiny Observable for Client or Server, to be used with DOM elements or custom objects.
 
-## Example
+## Using the factory
+
 ```javascript
-const observable = require("tiny-observable");
-let observer = observable();
+import {observable} from "tiny-observable";
+const observer = observable();
 
 // Hooking into every click event
 observer.hook(document.querySelector("body"), "click");
 
 // Capturing events, and redirecting
-observer.on("click", function (ev) {
-  ev.preventDefault();
-  ev.stopPropagation();
-  customFunction(ev);
-});
+observer.on("click", ev => customFunction(ev));
+```
+
+## Using the Class
+
+```javascript
+import {Observable} from "tiny-observable";
+const observer = Observable();
+```
+
+```javascript
+import {Observable} from "tiny-observable";
+class MyObservable extends Observable {}
+```
+
+## Testing
+
+Tiny-LRU has 100% code coverage with its tests.
+
+```console
+> nyc mocha test/*.js
+
+
+
+  Observable
+    √ Will create a new observable
+    √ Will reassign limit with setMaxListeners()
+    √ Will dispatch events when empty
+    √ Will hook element dispatch of event
+    √ Will dispatch event
+    √ Will unhook element dispatch of event
+    √ Will add & remove event handlers to a hooked input
+    √ Will throw errors with bad inputs
+
+
+  8 passing (6ms)
+
+---------------------|---------|----------|---------|---------|---------------------------------------
+File                 | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+---------------------|---------|----------|---------|---------|---------------------------------------
+All files            |   95.83 |    76.71 |   86.95 |     100 |                                      
+ tiny-observable.cjs |   95.83 |    76.71 |   86.95 |     100 | 18-24,38,58,63,89,114,127-139,154-155
+---------------------|---------|----------|---------|---------|---------------------------------------
 ```
 
 ## API
-#### dispatch(event [, ...]);
-Dispatches an event, with optional arguments.
 
-#### hook(object, event);
-Hooks into `object` for an event; can be an Element or Array like Object.
-
-#### off(event, id);
-Removes all, or a specific listener for an event.
-
-#### on(event, handler[, id, scope])
+### addListener(event, handler[, id, scope])
 Adds a listener for an event.
 
-#### once(event, handler[, id, scope])
+### dispatch(event [, ...]);
+Dispatches an event, with optional arguments.
+
+### emit(event [, ...]);
+Dispatches an event, with optional arguments.
+
+### eventNames();
+Returns an Array of event names.
+
+### getMaxListeners();
+Returns the limit of listeners per event.
+
+### listenerCount(event);
+Returns the count of listeners per event; this does not relate to hooked objects or elements.
+
+### hook(object, event);
+Hooks an event on an object or element.
+
+### id();
+Returns a random UUID (v4).
+
+### off(event, id);
+Removes all, or a specific listener for an event.
+
+### on(event, handler[, id, scope])
+Adds a listener for an event.
+
+### once(event, handler[, id, scope])
 Adds a single execution event listener for an event.
 
-#### unhook(object, event);
-Unhooks an event from a `object`; can be an Element or Array like Object.
+### rawListeners(event)
+Returns an Array of raw functions for an event.
+
+### removeAllListeners(event)
+Removes all event listeners for an event.
+
+### removeListener(event, id)
+Removes an event listener by id.
+
+### setMaxListeners();
+Sets the limit of listeners per event.
+
+### unhook(object, event);
+Unhooks an event from an object or element.
 
 ## License
 Copyright (c) 2016 Jason Mulligan
