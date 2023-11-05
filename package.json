@@ -16,7 +16,7 @@
   },
   "engineStrict": true,
   "scripts": {
-    "build": "npm run lint && rm -rf dist && npm run rollup",
+    "build": "npm run lint && rm -rf dist && npm run rollup && npm run types && npm test",
     "changelog": "auto-changelog -p",
     "rollup": "rollup --config",
     "fix": "eslint --fix *.js src/*.js",

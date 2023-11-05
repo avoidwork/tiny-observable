@@ -23,6 +23,10 @@ class Observable {
 		this.hooks = new WeakMap();
 	}
 
+	addListener (ev = EMPTY, handler = HANDLER, id = this.id(), scope = this) {
+		return this.on(ev, handler, id, scope);
+	}
+
 	dispatch (ev = EMPTY, ...args) {
 		if (ev.length === 0) {
 			throw new TypeError(INVALID_ARGUMENTS);
@@ -31,6 +35,26 @@ class Observable {
 		this.listeners.get(ev)?.forEach(obj => obj.handler.apply(obj.scope, args));
 
 		return this;
+	}
+
+	emit (ev = EMPTY, ...args) {
+		return this.dispatch(ev, ...args);
+	}
+
+	eventNames () {
+		return Array.from(this.listeners.keys());
+	}
+
+	getMaxListeners () {
+		return this.limit;
+	}
+
+	listenerCount (ev = "") {
+		if (ev.length === 0) {
+			throw new TypeError(INVALID_ARGUMENTS);
+		}
+
+		return this.listeners.get(ev)?.size ?? 0;
 	}
 
 	hook (target = null, ev = EMPTY) {
@@ -68,6 +92,10 @@ class Observable {
 	}
 
 	on (ev = EMPTY, handler = HANDLER, id = this.id(), scope = this) {
+		if (ev.length === 0) {
+			throw new TypeError(INVALID_ARGUMENTS);
+		}
+
 		if (this.listeners.has(ev) === false) {
 			this.listeners.set(ev, new Map());
 		}
@@ -86,6 +114,23 @@ class Observable {
 			handler.apply(scope, args);
 			this.off(ev, id);
 		}, id, scope);
+	}
+
+	rawListeners (ev = EMPTY) {
+		if (ev.length === 0) {
+			throw new TypeError(INVALID_ARGUMENTS);
+		}
+
+		return Array.from(this.listeners.get(ev)?.values() ?? []);
+	}
+
+
+	removeAllListeners (ev = EMPTY) {
+		return this.off(ev);
+	}
+
+	removeListener (ev = EMPTY, id = EMPTY) {
+		return this.off(ev, id);
 	}
 
 	setMaxListeners (arg = 10) {
