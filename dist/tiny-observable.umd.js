@@ -1,6 +1,17 @@
-import {EMPTY, HANDLER, ID, INVALID_ARGUMENTS, POSSIBLE_MEMORY_LEAK, TOKEN_EVENT, TOKEN_LIMIT} from "./constants.js";
-
-export class Observable {
+/**
+ * tiny-observable
+ *
+ * @copyright 2023 Jason Mulligan <jason.mulligan@avoidwork.com>
+ * @license BSD-3-Clause
+ * @version 2.0.0
+ */
+(function(g,f){typeof exports==='object'&&typeof module!=='undefined'?f(exports):typeof define==='function'&&define.amd?define(['exports'],f):(g=typeof globalThis!=='undefined'?globalThis:g||self,f(g.lru={}));})(this,(function(exports){'use strict';const EMPTY = "";
+const HANDLER = () => void 0;
+const ID = () => `ob-${Math.random().toString(36).slice(2, 9)}`;
+const INVALID_ARGUMENTS = "Invalid arguments";
+const POSSIBLE_MEMORY_LEAK = "`Possible memory leak, more than {{LIMIT}} listeners for event: {{EVENT}}";
+const TOKEN_EVENT = "{{EVENT}}";
+const TOKEN_LIMIT = "{{LIMIT}}";class Observable {
 	constructor (arg = 10, id = crypto?.randomUUID ?? ID) {
 		this.id = id;
 		this.limit = arg;
@@ -104,6 +115,6 @@ export class Observable {
 	}
 }
 
-export function observable (arg = 10, id = crypto?.randomUUID ?? ID) {
+function observable (arg = 10, id = crypto?.randomUUID ?? ID) {
 	return new Observable(arg, id);
-}
+}exports.Observable=Observable;exports.observable=observable;}));
