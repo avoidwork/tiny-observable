@@ -30,7 +30,7 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run buid
+        run: npm run build
 
   automerge:
     needs: build
