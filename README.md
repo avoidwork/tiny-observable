@@ -1,4 +1,4 @@
-# tiny-observable
+# Tiny Observable
 
 Tiny Observable for Client or Server, to be used with DOM elements or custom objects.
 
@@ -29,7 +29,7 @@ class MyObservable extends Observable {}
 
 ## Testing
 
-Tiny-LRU has 100% code coverage with its tests.
+Tiny Observable has 100% code coverage with its tests.
 
 ```console
 > nyc mocha test/*.js
@@ -101,12 +101,12 @@ Removes all event listeners for an event.
 ### removeListener(event, id)
 Removes an event listener by id.
 
-### setMaxListeners();
+### setMaxListeners(n);
 Sets the limit of listeners per event.
 
 ### unhook(object, event);
 Unhooks an event from an object or element.
 
 ## License
-Copyright (c) 2016 Jason Mulligan
+Copyright (c) 2023 Jason Mulligan
 Licensed under the BSD-3 license
